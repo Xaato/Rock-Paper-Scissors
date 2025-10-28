@@ -14,10 +14,17 @@ return "stone"
 
 function getHumanChoise(choise){
 let chance = choise.toLowerCase();
-
 console.log(chance);
-
 }
 
+function compare(choise, computerChoice){
+    if(choise === computerChoice) {
+        console.log("Player win")
+    } else {
+        console.log("Computer win")
+    }
+}
+let computerChoice = getComputerChoice(random);
+console.log(computerChoice);
 getHumanChoise(choise);
-getComputerChoice(random);
+compare(choise, computerChoice);
