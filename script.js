@@ -4,12 +4,11 @@ let random = Math.random();
 
 function getComputerChoice(random){
     if (random < 0.33){
-        console.log("stone")
-    }
-    else if(random < 0.66){
-        console.log("paper")
+return "stone"    
+} else if(random < 0.66){
+        return "paper"
     } else{
-        console.log("scissor")
+        return "scissor"
     }
 }
 
