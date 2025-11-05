@@ -1,11 +1,11 @@
-let choice = prompt("Type Rock, Paper or Scissor")
-let random = Math.random();
+const buttons = document.querySelectorAll("button")
+const resultsDiv = document.querySelector("#results")
 let humanScore = 0;
 let computerScore = 0;
 
 function getComputerChoice(random){
     if (random < 0.33){
-        return "stone"    
+        return "rock"    
 } else if(random < 0.66){
         return "paper"
     } else{
@@ -13,29 +13,32 @@ function getComputerChoice(random){
     }
 }
 
-function getHumanChoise(choice){
-let chance = choice.toLowerCase();
-return chance;
-}
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    const humanChoice = button.id;
+    const computerChoice = getComputerChoice(Math.random());
+    playRound(humanChoice, computerChoice);
+  });
+});
+
 
 function playRound(humanChoice, computerChoice){
+    let message = "";
+
     if (humanChoice === computerChoice) {
-        console.log(`It's a tie! You both chose ${humanChoice}.`);
+        message = `It's a tie! You both chose ${humanChoice}.`;
     } else if (
-        (humanChoice === "rock" && computerChoice === "scissors") ||
-        (humanChoice === "scissors" && computerChoice === "paper") ||
+        (humanChoice === "rock" && computerChoice === "scissor") ||
+        (humanChoice === "scissor" && computerChoice === "paper") ||
         (humanChoice === "paper" && computerChoice === "rock")
     ){
-        console.log(`You win! ${humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1)} beats ${computerChoice}.`);
+        message = `You win! ${humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1)} beats ${computerChoice}.`;
         humanScore++;
     } else {
-        console.log(`You lose! ${computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)} beats ${humanChoice}.`);
+        message = `You lose! ${computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)} beats ${humanChoice}.`;
         computerScore++;
     }
-    console.log(`Current Score: You: ${humanScore} - Computer: ${computerScore}`);
-}
 
-let computerChoice = getComputerChoice(random);
-let humanChoice = getHumanChoise(choice);
-playRound(humanChoice, computerChoice);
+    resultsDiv.textContent = `${message} Current Score: You: ${humanScore} - Computer: ${computerScore}`;
+}
 
